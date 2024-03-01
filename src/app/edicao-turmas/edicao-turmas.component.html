@@ -1,0 +1,65 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- campo9 oculto -->
+    <input type="hidden" formControlName="id"/>
+
+    <!-- mensagem de retorno da API -->
+    <div *ngIf="mensagem != ''"
+    class="alert alert-primary alert-dismissible fade show"
+    role="alert">
+    <strong>{{mensagem}}</strong>
+    <button
+        (click)="mensagem = ''"
+        type="button"
+        class="btn-close"
+        aria-label="Close"></button>
+</div>
+
+    <!-- Linha -->
+    <div class="row">
+        <!-- Coluna -->
+        <div class="col">
+            <label>Nome da turma:</label>
+            <input type="text" class="form-control" formControlName="nome" />
+            <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
+                Informe um nome de 8 a 100 caracteres.
+            </div>
+        </div>
+        <!-- Coluna -->
+        <div class="col">
+            <label>Data de início</label>
+            <input type="text" class="form-control" formControlName="dataInicio" />
+            <div class="text-danger" *ngIf="f['dataInicio'].touched && f['dataInicio'].invalid">
+                Informe uma data no formato '01/02/2003'.
+            </div>
+        </div>
+        <div class="col">
+            <label>Data de término</label>
+            <input type="text" class="form-control" formControlName="dataTermino" />
+            <div class="text-danger" *ngIf="f['dataTermino'].touched && f['dataTermino'].invalid">
+                Informe uma data no formato '01/02/2003'.
+            </div>
+        </div>
+        <div class="col">
+            <label>Professor:</label>
+            <select class="form-select" formControlName="idProfessor">
+                <option>Escolha uma opção</option>
+                <option *ngFor="let p of professores" value="{{p.id}}">{{p.nome}}</option>
+            </select>
+
+            <div class="text-danger" *ngIf="f['idProfessor'].touched && f['idProfessor'].invalid">
+                Selecione um professor para a turma.
+            </div>
+        </div>
+    </div>
+
+    <!-- Linha -->
+    <div class="row mt-3">
+        <div class="col">
+            <button type="submit" [disabled]="form.invalid" class="btn btn-outline-success btn-sm">
+                Salvar alterações
+            </button>
+        </div>
+    </div>
+
+</form>

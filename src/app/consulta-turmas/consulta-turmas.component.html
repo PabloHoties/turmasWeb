@@ -1,0 +1,52 @@
+<!-- mensagem de retorno da API -->
+<div *ngIf="mensagem != ''"
+     class="alert alert-primary alert-dismissible fade show"
+     role="alert">
+    <strong>{{mensagem}}</strong>
+    <button
+        (click)="mensagem = ''"
+        type="button"
+        class="btn-close"
+        aria-label="Close"></button>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nome da turma</th>
+                <th>Data de início</th>
+                <th>Data de término</th>
+                <th>Nome do professor(a)</th>
+                <th>Telefone do professor(a)</th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of turmas">
+                <td>{{t.nome}}</td>
+                <td>{{t.dataInicio}}</td>
+                <td>{{t.dataTermino}}</td>
+                <td>{{t.professor.nome}}</td>
+                <td>{{t.professor.telefone}}</td>
+                <td>
+                    <button class="btn btn-outline-primary btn-sm"
+                    (click)="onEdit(t.id)">
+                        Editar
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm ms-2"
+                    (click)="onDelete(t.id)">
+                        Excluir
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    Quantidade de turmas: {{turmas.length}}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
